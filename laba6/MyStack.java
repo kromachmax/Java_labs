@@ -1,23 +1,27 @@
+import java.util.Arrays;
 public class MyStack<T> {
-    private int top;
-    private Object[] stackArray;
+    private int top = -1;
+    private T[] stackArray;
 
     public MyStack(int size) {
-        stackArray = new Object[size];
-        top = -1;
+        stackArray = (T[]) new Object[size];
     }
-
+    public MyStack () {
+        this(16);
+    }
     public void push(T value) {
-        if (top < stackArray.length - 1) {
-            stackArray[++top] = value;
-        } else {
-            System.out.println("Стек переполнен. Невозможно добавить элемент.");
+        if (top + 1 == stackArray.length ) {
+            stackArray = Arrays.copyOf(stackArray, 2*stackArray.length);
         }
+        stackArray[++top] = value;
+
     }
 
     public T pop() {
         if (top >= 0) {
-            T poppedValue = (T) stackArray[top--];
+            T poppedValue = (T) stackArray[top];
+            stackArray[top] = null;
+            --top;
             return poppedValue;
         } else {
             System.out.println("Стек пуст. Невозможно извлечь элемент.");
@@ -38,11 +42,6 @@ public class MyStack<T> {
     public boolean isEmpty() {
         return top == -1;
     }
-
-    public boolean isFull() {
-        return top == stackArray.length - 1;
-    }
-
     public int getSize(){
         return stackArray.length;
     }

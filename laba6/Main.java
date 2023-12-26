@@ -29,6 +29,6 @@ public class Main{
 
         System.out.println("Размер стека строк: " + stringStack.getSize());
 
-        System.out.println("Стек интов полон: " + stringStack.isFull());
+
     }
 }
